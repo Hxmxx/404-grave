@@ -4,6 +4,7 @@ import { useState } from 'react'
 import RepoSearch from './repo-search'
 import RepoDisplay from './repo-display'
 import { RepoData } from '@/types/repo'
+import { TombstoneIcon } from '@/components/ui/grave-icons'
 
 interface RepoSearchContainerProps {
   defaultRepoData: RepoData
@@ -20,7 +21,10 @@ export default function RepoSearchContainer({ defaultRepoData }: RepoSearchConta
     <>
       {/* 레포지토리 검색 섹션 */}
       <div className="mb-12 w-full max-w-4xl">
-        <h2 className="text-2xl font-bold text-center mb-6">GitHub 레포지토리 검색</h2>
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <TombstoneIcon className="h-8 w-8 text-primary" />
+          <h2 className="text-3xl font-bold text-center grave-text-gradient">GitHub 레포지토리 검색</h2>
+        </div>
         <RepoSearch onRepoFound={handleRepoFound} />
       </div>
 

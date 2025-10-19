@@ -45,71 +45,98 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
+  
+  /* 404 Grave 디자인 시스템 - 묘지 테마 */
+  /* Primary Colors */
+  --grave-purple: #6366F1;        /* 다크 퍼플 - 신비로운 밤 */
+  --grave-gray: #64748B;          /* 회색톤 - 엄숙함 */
+  --grave-lavender: #A78BFA;      /* 소프트 라벤더 - 위로 */
+  
+  /* Accent Colors */
+  --grave-success: #10B981;       /* 성공 (입양) - 초록 부활 */
+  --grave-warning: #F59E0B;       /* 경고 - 주황 */
+  --grave-danger: #EF4444;        /* 위험 - 빨강 */
+  
+  /* Background Colors */
+  --grave-bg-main: #0F172A;       /* 메인 배경 - 다크 네이비 밤하늘 */
+  --grave-bg-card: #1E293B;       /* 카드 배경 - 약간 밝은 회색 */
+  --grave-text: #F1F5F9;          /* 텍스트 - 밝은 회색 */
+  
+  /* 기존 시스템과 호환 */
+  --background: var(--grave-bg-main);
+  --foreground: var(--grave-text);
+  --card: var(--grave-bg-card);
+  --card-foreground: var(--grave-text);
+  --popover: var(--grave-bg-card);
+  --popover-foreground: var(--grave-text);
+  --primary: var(--grave-purple);
+  --primary-foreground: var(--grave-text);
+  --secondary: var(--grave-gray);
+  --secondary-foreground: var(--grave-text);
+  --muted: var(--grave-gray);
+  --muted-foreground: var(--grave-text);
+  --accent: var(--grave-lavender);
+  --accent-foreground: var(--grave-text);
+  --destructive: var(--grave-danger);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: var(--grave-purple);
+  
+  /* Chart colors for data visualization */
+  --chart-1: var(--grave-purple);
+  --chart-2: var(--grave-success);
+  --chart-3: var(--grave-warning);
+  --chart-4: var(--grave-lavender);
+  --chart-5: var(--grave-danger);
+  
+  /* Sidebar */
+  --sidebar: var(--grave-bg-card);
+  --sidebar-foreground: var(--grave-text);
+  --sidebar-primary: var(--grave-purple);
+  --sidebar-primary-foreground: var(--grave-text);
+  --sidebar-accent: var(--grave-lavender);
+  --sidebar-accent-foreground: var(--grave-text);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--grave-purple);
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
+  /* 다크 테마는 기본적으로 묘지 테마와 동일 */
+  --background: var(--grave-bg-main);
+  --foreground: var(--grave-text);
+  --card: var(--grave-bg-card);
+  --card-foreground: var(--grave-text);
+  --popover: var(--grave-bg-card);
+  --popover-foreground: var(--grave-text);
+  --primary: var(--grave-purple);
+  --primary-foreground: var(--grave-text);
+  --secondary: var(--grave-gray);
+  --secondary-foreground: var(--grave-text);
+  --muted: var(--grave-gray);
+  --muted-foreground: var(--grave-text);
+  --accent: var(--grave-lavender);
+  --accent-foreground: var(--grave-text);
+  --destructive: var(--grave-danger);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: var(--grave-purple);
+  
+  /* Chart colors */
+  --chart-1: var(--grave-purple);
+  --chart-2: var(--grave-success);
+  --chart-3: var(--grave-warning);
+  --chart-4: var(--grave-lavender);
+  --chart-5: var(--grave-danger);
+  
+  /* Sidebar */
+  --sidebar: var(--grave-bg-card);
+  --sidebar-foreground: var(--grave-text);
+  --sidebar-primary: var(--grave-purple);
+  --sidebar-primary-foreground: var(--grave-text);
+  --sidebar-accent: var(--grave-lavender);
+  --sidebar-accent-foreground: var(--grave-text);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--grave-purple);
 }
 
 @layer base {
@@ -118,5 +145,80 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  /* 묘지 테마 커스텀 스타일 */
+  .grave-gradient {
+    background: linear-gradient(135deg, var(--grave-bg-main) 0%, #1a202c 50%, var(--grave-bg-card) 100%);
+  }
+  
+  .grave-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .grave-text-gradient {
+    background: linear-gradient(135deg, var(--grave-purple) 0%, var(--grave-lavender) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .grave-glow {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+  
+  .grave-tombstone {
+    position: relative;
+  }
+  
+  .grave-tombstone::before {
+    content: '🪦';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    opacity: 0.7;
+  }
+  
+  /* 타이포그래피 */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-spectral), serif;
+    font-weight: 600;
+  }
+  
+  code, pre {
+    font-family: var(--font-fira-code), 'Monaco', 'Consolas', monospace;
+  }
+  
+  /* 애니메이션 */
+  @keyframes grave-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .grave-fade-in {
+    animation: grave-fade-in 0.6s ease-out;
+  }
+  
+  @keyframes grave-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  .grave-pulse {
+    animation: grave-pulse 2s ease-in-out infinite;
   }
 }

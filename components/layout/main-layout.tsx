@@ -8,7 +8,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen grave-gradient">
       <Header />
       <main className="flex flex-col items-center justify-center py-12 px-4">
         {children}
