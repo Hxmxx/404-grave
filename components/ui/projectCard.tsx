@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { TombstoneIcon } from './tombstoneIcon'
-import { Calendar, Github, User } from 'lucide-react'
+import { Calendar, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface ProjectCardProps {

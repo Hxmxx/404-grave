@@ -6,13 +6,10 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Github } from 'lucide-react'
 
 const LoginPage = () => {
-    const router = useRouter()
-    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement)
@@ -30,7 +27,7 @@ const LoginPage = () => {
                 const data = await response.json()
                 toast.error(data.error || '로그인 실패')
             }
-        } catch (error) {
+        } catch {
             toast.error('로그인 실패')
         }
     }
@@ -42,7 +39,7 @@ const LoginPage = () => {
                 const { url } = await response.json()
                 window.location.href = url
             }
-        } catch (error) {
+        } catch {
             toast.error(`${provider} 로그인 실패`)
         }
     }

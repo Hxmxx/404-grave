@@ -53,7 +53,7 @@ export async function GET(request: Request) {
         }
 
         return NextResponse.json(repoData)
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
     }
 }

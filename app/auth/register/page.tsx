@@ -31,7 +31,7 @@ const RegisterPage = () => {
                 const data = await response.json()
                 toast.error(data.error || '회원가입 실패')
             }
-        } catch (error) {
+        } catch {
             toast.error('회원가입 실패')
         }
     }
@@ -43,7 +43,7 @@ const RegisterPage = () => {
                 const { url } = await response.json()
                 window.location.href = url
             }
-        } catch (error) {
+        } catch {
             toast.error(`${provider} 로그인 실패`)
         }
     }

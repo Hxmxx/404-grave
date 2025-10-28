@@ -17,8 +17,8 @@ export async function POST(request: Request) {
         }
 
         return NextResponse.json({ data })
-    } catch (error) {
-        console.error('Login error:', error)
+    } catch (err) {
+        console.error('Login error:', err)
         return NextResponse.json({ error: '로그인 실패' }, { status: 500 })
     }
 }
