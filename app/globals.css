@@ -48,9 +48,11 @@
 
     /* 404 Grave 디자인 시스템 - 묘지 테마 */
     /* Primary Colors */
-    --grave-purple: #6366f1; /* 다크 퍼플 - 신비로운 밤 */
-    --grave-gray: #64748b; /* 회색톤 - 엄숙함 */
-    --grave-lavender: #a78bfa; /* 소프트 라벤더 - 위로 */
+    --grave-green-dark: #2f3e46; /* 다크 그린 */
+    --grave-green: #354f52; /* 그린 그레이 */
+    --grave-teal: #52796f; /* 청록(틸) */
+    --grave-sage: #84a98c; /* 세이지 그린 */
+    --grave-gray: #cad2c5; /* 라이트 그레이 */
 
     /* Accent Colors */
     --grave-success: #10b981; /* 성공 (입양) - 초록 부활 */
@@ -58,9 +60,9 @@
     --grave-danger: #ef4444; /* 위험 - 빨강 */
 
     /* Background Colors */
-    --grave-bg-main: #0f172a; /* 메인 배경 - 다크 네이비 밤하늘 */
-    --grave-bg-card: #1e293b; /* 카드 배경 - 약간 밝은 회색 */
-    --grave-text: #f1f5f9; /* 텍스트 - 밝은 회색 */
+    --grave-bg-main: #ffffff; /* 메인 배경 - 하얀색 */
+    --grave-bg-card: #f8fafc; /* 카드 배경 - 연한 회색 */
+    --grave-text: #1e293b; /* 텍스트 - 어두운 회색 */
 
     /* 기존 시스템과 호환 */
     --background: var(--grave-bg-main);
@@ -69,35 +71,46 @@
     --card-foreground: var(--grave-text);
     --popover: var(--grave-bg-card);
     --popover-foreground: var(--grave-text);
-    --primary: var(--grave-purple);
+    --primary: var(--grave-sage);
     --primary-foreground: var(--grave-text);
     --secondary: var(--grave-gray);
     --secondary-foreground: var(--grave-text);
     --muted: var(--grave-gray);
     --muted-foreground: var(--grave-text);
-    --accent: var(--grave-lavender);
+    --accent: var(--grave-teal);
     --accent-foreground: var(--grave-text);
     --destructive: var(--grave-danger);
-    --border: rgba(255, 255, 255, 0.1);
-    --input: rgba(255, 255, 255, 0.1);
-    --ring: var(--grave-purple);
+    --border: rgba(0, 0, 0, 0.1);
+    --input: rgba(0, 0, 0, 0.05);
+    --ring: var(--grave-sage);
 
     /* Chart colors for data visualization */
-    --chart-1: var(--grave-purple);
+    --chart-1: var(--grave-sage);
     --chart-2: var(--grave-success);
     --chart-3: var(--grave-warning);
-    --chart-4: var(--grave-lavender);
+    --chart-4: var(--grave-teal);
     --chart-5: var(--grave-danger);
 
     /* Sidebar */
     --sidebar: var(--grave-bg-card);
     --sidebar-foreground: var(--grave-text);
-    --sidebar-primary: var(--grave-purple);
+    --sidebar-primary: var(--grave-sage);
     --sidebar-primary-foreground: var(--grave-text);
-    --sidebar-accent: var(--grave-lavender);
+    --sidebar-accent: var(--grave-teal);
     --sidebar-accent-foreground: var(--grave-text);
     --sidebar-border: rgba(255, 255, 255, 0.1);
-    --sidebar-ring: var(--grave-purple);
+    --sidebar-ring: var(--grave-sage);
+}
+
+/* 기본 배경색 강제 적용 */
+html {
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
 }
 
 .dark {
@@ -108,33 +121,33 @@
     --card-foreground: var(--grave-text);
     --popover: var(--grave-bg-card);
     --popover-foreground: var(--grave-text);
-    --primary: var(--grave-purple);
+    --primary: var(--grave-sage);
     --primary-foreground: var(--grave-text);
     --secondary: var(--grave-gray);
     --secondary-foreground: var(--grave-text);
     --muted: var(--grave-gray);
     --muted-foreground: var(--grave-text);
-    --accent: var(--grave-lavender);
+    --accent: var(--grave-teal);
     --accent-foreground: var(--grave-text);
     --destructive: var(--grave-danger);
-    --border: rgba(255, 255, 255, 0.1);
-    --input: rgba(255, 255, 255, 0.1);
-    --ring: var(--grave-purple);
+    --border: rgba(0, 0, 0, 0.1);
+    --input: rgba(0, 0, 0, 0.05);
+    --ring: var(--grave-sage);
 
     /* Chart colors */
-    --chart-1: var(--grave-purple);
+    --chart-1: var(--grave-sage);
     --chart-2: var(--grave-success);
     --chart-3: var(--grave-warning);
-    --chart-4: var(--grave-lavender);
+    --chart-4: var(--grave-teal);
     --chart-5: var(--grave-danger);
 
     /* Sidebar */
     --sidebar: var(--grave-bg-card);
     --sidebar-foreground: var(--grave-text);
-    --sidebar-primary: var(--grave-purple);
+    --sidebar-primary: var(--grave-sage);
     --sidebar-primary-foreground: var(--grave-text);
-    --sidebar-accent: var(--grave-lavender);
+    --sidebar-accent: var(--grave-teal);
     --sidebar-accent-foreground: var(--grave-text);
     --sidebar-border: rgba(255, 255, 255, 0.1);
-    --sidebar-ring: var(--grave-purple);
+    --sidebar-ring: var(--grave-sage);
 }

@@ -20,7 +20,7 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="ko" className="dark">
+        <html lang="ko">
             <body className={`${NotoSansKR.variable} antialiased`}>
                 <QueryProvider>{children}</QueryProvider>
             </body>
