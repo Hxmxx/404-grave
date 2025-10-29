@@ -30,12 +30,14 @@
 ### 설치 및 실행
 
 1. **저장소 클론**
+
 ```bash
 git clone https://github.com/yourusername/404-grave.git
 cd 404-grave
 ```
 
 2. **의존성 설치**
+
 ```bash
 bun install
 # 또는
@@ -64,6 +66,7 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
 4. **개발 서버 실행**
+
 ```bash
 bun dev
 # 또는
@@ -71,6 +74,7 @@ npm run dev
 ```
 
 5. **브라우저에서 열기**
+
 ```
 http://localhost:3000
 ```
@@ -113,6 +117,7 @@ http://localhost:3000
 ## 🛠️ 기술 스택
 
 ### Frontend
+
 - **Next.js 15.5** - React 프레임워크
 - **TypeScript** - 타입 안정성
 - **Tailwind CSS 4.0** - 스타일링
@@ -121,11 +126,13 @@ http://localhost:3000
 - **Sonner** - 토스트 알림
 
 ### Backend & Database
+
 - **Supabase** - 백엔드 및 데이터베이스
 - **Supabase Auth** - 인증 시스템
 - **PostgreSQL** - 데이터베이스
 
 ### 개발 도구
+
 - **Bun** - 패키지 매니저
 - **ESLint** - 코드 린팅
 - **Prettier** - 코드 포맷팅

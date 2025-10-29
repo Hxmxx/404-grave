@@ -22,4 +22,3 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         </PageLayout>
     )
 }
-

@@ -140,7 +140,10 @@ const RegisterPage = () => {
                         <div className="mt-6 text-center">
                             <p className="text-sm text-gray-600">
                                 이미 계정이 있으신가요?{' '}
-                                <Link href="/auth/login" className="font-medium text-gray-900 hover:underline">
+                                <Link
+                                    href="/auth/login"
+                                    className="font-medium text-gray-900 hover:underline"
+                                >
                                     로그인
                                 </Link>
                             </p>

@@ -8,11 +8,11 @@ interface EmptyStateProps {
     useTombstone?: boolean
 }
 
-export function EmptyState({ 
-    icon: Icon, 
-    title = '데이터가 없습니다', 
+export function EmptyState({
+    icon: Icon,
+    title = '데이터가 없습니다',
     description,
-    useTombstone = false 
+    useTombstone = false,
 }: EmptyStateProps) {
     return (
         <div className="flex flex-col items-center justify-center py-12 px-4">
@@ -26,8 +26,9 @@ export function EmptyState({
                 )}
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">{title}</h3>
-            {description && <p className="text-sm text-gray-600 max-w-sm text-center">{description}</p>}
+            {description && (
+                <p className="text-sm text-gray-600 max-w-sm text-center">{description}</p>
+            )}
         </div>
     )
 }
-

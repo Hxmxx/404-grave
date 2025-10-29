@@ -21,4 +21,3 @@ export async function GET() {
         return NextResponse.json({ error: 'Google 로그인 실패' }, { status: 500 })
     }
 }
-

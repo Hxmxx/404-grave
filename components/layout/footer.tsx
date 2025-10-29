@@ -17,20 +17,31 @@ const Footer = () => {
                             <br />
                             당신의 실패를 기록하고, 다른 사람의 경험에서 배우세요.
                         </p>
-                        <p className="text-xs text-gray-500 mt-2">© 2025 404 Grave. All rights reserved.</p>
+                        <p className="text-xs text-gray-500 mt-2">
+                            © 2025 404 Grave. All rights reserved.
+                        </p>
                     </div>
 
                     {/* Middle Section - Legal Links */}
                     <div className="flex gap-8">
                         <div className="flex flex-col gap-2">
                             <h4 className="text-xs font-semibold text-gray-900 mb-1">법적 고지</h4>
-                            <Link href="/terms" className="text-xs text-gray-600 hover:text-gray-900 transition-colors">
+                            <Link
+                                href="/terms"
+                                className="text-xs text-gray-600 hover:text-gray-900 transition-colors"
+                            >
                                 이용약관
                             </Link>
-                            <Link href="/privacy" className="text-xs text-gray-600 hover:text-gray-900 transition-colors">
+                            <Link
+                                href="/privacy"
+                                className="text-xs text-gray-600 hover:text-gray-900 transition-colors"
+                            >
                                 개인정보처리방침
                             </Link>
-                            <Link href="/contact" className="text-xs text-gray-600 hover:text-gray-900 transition-colors">
+                            <Link
+                                href="/contact"
+                                className="text-xs text-gray-600 hover:text-gray-900 transition-colors"
+                            >
                                 문의
                             </Link>
                         </div>
@@ -44,7 +55,9 @@ const Footer = () => {
                                 variant="ghost"
                                 size="icon"
                                 className="h-9 w-9"
-                                onClick={() => window.open('mailto:haminni.dev@gmail.com', '_blank')}
+                                onClick={() =>
+                                    window.open('mailto:haminni.dev@gmail.com', '_blank')
+                                }
                             >
                                 <Mail className="h-4 w-4 text-gray-600" />
                             </Button>
@@ -73,7 +86,9 @@ const Footer = () => {
                                 variant="ghost"
                                 size="icon"
                                 className="h-9 w-9"
-                                onClick={() => window.open('https://www.instagram.com/h._m1n_/', '_blank')}
+                                onClick={() =>
+                                    window.open('https://www.instagram.com/h._m1n_/', '_blank')
+                                }
                             >
                                 <Instagram className="h-4 w-4 text-gray-600" />
                             </Button>

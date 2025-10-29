@@ -49,7 +49,7 @@ const LoginPage = () => {
             <Container size="sm" className="py-12">
                 <div className="max-w-md mx-auto">
                     <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">로그인</h1>
-                    
+
                     <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="space-y-2">
@@ -127,7 +127,10 @@ const LoginPage = () => {
                         <div className="mt-6 text-center">
                             <p className="text-sm text-gray-600">
                                 계정이 없으신가요?{' '}
-                                <Link href="/auth/register" className="font-medium text-gray-900 hover:underline">
+                                <Link
+                                    href="/auth/register"
+                                    className="font-medium text-gray-900 hover:underline"
+                                >
                                     회원가입
                                 </Link>
                             </p>

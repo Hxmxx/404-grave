@@ -35,7 +35,9 @@ const ProfilePage = ({ params }: { params: Promise<{ username: string }> }) => {
                             </div>
                             <div className="flex-1">
                                 <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                                    {user?.user_metadata?.full_name || user?.user_metadata?.name || username}
+                                    {user?.user_metadata?.full_name ||
+                                        user?.user_metadata?.name ||
+                                        username}
                                 </h1>
                                 <p className="text-gray-600 mb-1">@{username}</p>
                                 {user?.user_metadata?.bio && (
@@ -53,7 +55,9 @@ const ProfilePage = ({ params }: { params: Promise<{ username: string }> }) => {
                                 <div>
                                     <p className="text-sm text-gray-500">가입일</p>
                                     <p className="text-sm font-medium text-gray-900">
-                                        {user?.created_at ? new Date(user.created_at).toLocaleDateString('ko-KR') : '-'}
+                                        {user?.created_at
+                                            ? new Date(user.created_at).toLocaleDateString('ko-KR')
+                                            : '-'}
                                     </p>
                                 </div>
                             </div>

@@ -19,33 +19,30 @@ interface ProjectCardProps {
     className?: string
 }
 
-export function ProjectCard({ 
-    id, 
-    title, 
-    description, 
-    status, 
+export function ProjectCard({
+    id,
+    title,
+    description,
+    status,
     createdAt,
     owner,
     thumbnail,
-    className 
+    className,
 }: ProjectCardProps) {
     return (
         <Link href={`/projects/${id}`}>
-            <div className={cn(
-                "group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg",
-                status === 'dead' && "hover:border-red-200",
-                status === 'alive' && "hover:border-green-200",
-                className
-            )}>
+            <div
+                className={cn(
+                    'group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg',
+                    status === 'dead' && 'hover:border-red-200',
+                    status === 'alive' && 'hover:border-green-200',
+                    className,
+                )}
+            >
                 {/* Thumbnail */}
                 <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100">
                     {thumbnail ? (
-                        <Image
-                            src={thumbnail}
-                            alt={title}
-                            fill
-                            className="object-cover"
-                        />
+                        <Image src={thumbnail} alt={title} fill className="object-cover" />
                     ) : (
                         <div className="flex items-center justify-center h-full">
                             <TombstoneIcon className="w-20 h-20 text-gray-300" />
@@ -53,11 +50,13 @@ export function ProjectCard({
                     )}
                     {/* Status Badge */}
                     <div className="absolute top-3 right-3">
-                        <span className={cn(
-                            "px-3 py-1 rounded-full text-xs font-medium",
-                            status === 'dead' && "bg-red-100 text-red-800",
-                            status === 'alive' && "bg-green-100 text-green-800"
-                        )}>
+                        <span
+                            className={cn(
+                                'px-3 py-1 rounded-full text-xs font-medium',
+                                status === 'dead' && 'bg-red-100 text-red-800',
+                                status === 'alive' && 'bg-green-100 text-green-800',
+                            )}
+                        >
                             {status === 'dead' ? '사망' : '부활'}
                         </span>
                     </div>
@@ -69,9 +68,7 @@ export function ProjectCard({
                         {title}
                     </h3>
                     {description && (
-                        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                            {description}
-                        </p>
+                        <p className="text-sm text-gray-600 mb-4 line-clamp-2">{description}</p>
                     )}
 
                     {/* Meta Info */}
@@ -92,4 +89,3 @@ export function ProjectCard({
         </Link>
     )
 }
-

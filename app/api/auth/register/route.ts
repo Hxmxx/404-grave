@@ -8,16 +8,16 @@ export async function POST(request: Request) {
         const { email, password } = await request.json()
         const validatedData = registerSchema.parse({ email, password })
         const supabase = await createClient()
-        
+
         const { data, error } = await supabase.auth.signUp({
             email: validatedData.email,
             password: validatedData.password,
         })
-        
+
         if (error) {
             return NextResponse.json({ error: error.message }, { status: error.status })
         }
-        
+
         return NextResponse.json({ data }, { status: 200 })
     } catch (error: unknown) {
         if (error instanceof ZodError) {

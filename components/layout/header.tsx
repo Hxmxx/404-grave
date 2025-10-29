@@ -59,33 +59,36 @@ const Header = () => {
                         </Link>
                     </div>
 
-                        {/* Desktop Navigation */}
-                        <nav className="hidden md:flex items-center gap-6">
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-6">
+                        <Link
+                            href="/projects"
+                            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                        >
+                            프로젝트
+                        </Link>
+                        <Link
+                            href="/adoption"
+                            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                        >
+                            부활
+                        </Link>
+                        {isLoggedIn && (
                             <Link
-                                href="/projects"
+                                href="/dashboard"
                                 className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
                             >
-                                프로젝트
+                                대시보드
                             </Link>
-                            <Link
-                                href="/adoption"
-                                className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-                            >
-                                부활
-                            </Link>
-                            {isLoggedIn && (
-                                <Link
-                                    href="/dashboard"
-                                    className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-                                >
-                                    대시보드
-                                </Link>
-                            )}
-                        </nav>
+                        )}
+                    </nav>
 
                     {/* Center Section - Search */}
                     {isSearchOpen && (
-                        <div ref={searchRef} className="absolute left-0 right-0 top-16 bg-white border-b border-gray-200 px-4 py-3 sm:px-6 lg:px-8">
+                        <div
+                            ref={searchRef}
+                            className="absolute left-0 right-0 top-16 bg-white border-b border-gray-200 px-4 py-3 sm:px-6 lg:px-8"
+                        >
                             <div className="mx-auto max-w-7xl">
                                 <Input
                                     type="text"
@@ -114,10 +117,16 @@ const Header = () => {
                             <Bell className="h-5 w-5" />
                         </Button>
 
-                        <Button variant="outline" size="sm" className="hidden sm:flex rounded-full text-sm">
-                            <FileText className="h-5 w-5" />
-                            사망진단서 작성
-                        </Button>
+                        {isLoggedIn && (
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="hidden sm:flex rounded-full text-sm"
+                            >
+                                <FileText className="h-5 w-5" />
+                                사망진단서 작성
+                            </Button>
+                        )}
 
                         {/* User Menu */}
                         {!isLoggedIn && !loading ? (
@@ -126,8 +135,15 @@ const Header = () => {
                             </Button>
                         ) : (
                             <div className="flex items-center gap-1">
-                                <Button variant="ghost" size="icon" className="cursor-pointer" asChild>
-                                    <Link href={`/profile/${user?.user_metadata?.user_name || user?.id}`}>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="cursor-pointer"
+                                    asChild
+                                >
+                                    <Link
+                                        href={`/profile/${user?.user_metadata?.user_name || user?.id}`}
+                                    >
                                         {user?.user_metadata?.avatar_url ? (
                                             <Image
                                                 src={user.user_metadata.avatar_url}
@@ -156,7 +172,9 @@ const Header = () => {
                                     </Button>
                                     {isOpen && (
                                         <div className="absolute right-0 top-10 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
-                                            <Link href={`/profile/${user?.user_metadata?.user_name || user?.id}`}>
+                                            <Link
+                                                href={`/profile/${user?.user_metadata?.user_name || user?.id}`}
+                                            >
                                                 <button className="w-full px-4 py-2 text-left hover:bg-gray-50 text-sm">
                                                     프로필
                                                 </button>

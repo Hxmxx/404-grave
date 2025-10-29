@@ -21,11 +21,10 @@ export function Container({ children, size = 'lg', noPadding = false, className 
                 'mx-auto w-full',
                 sizeMap[size],
                 !noPadding && 'px-4 sm:px-6 lg:px-8',
-                className
+                className,
             )}
         >
             {children}
         </div>
     )
 }
-
