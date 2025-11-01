@@ -1,53 +1,33 @@
 import PageLayout from '@/components/layout/pageLayout'
 import { Container } from '@/components/layout/container'
 import { ProjectCard } from '@/components/ui/projectCard'
-import { TombstoneIcon } from '@/components/ui/tombstoneIcon'
-import { EmptyState } from '@/components/ui/emptyState'
+import { createClient } from '@/lib/supabase/server'
+import { ProjectWithOwner } from '@/types/project'
 import { Skeleton } from '@/components/ui/skeleton'
-import { FileText, Search, AlertCircle } from 'lucide-react'
+import Link from 'next/link'
 
-const Home = () => {
-    // 예제 프로젝트 데이터
-    const exampleProjects = [
-        {
-            id: '1',
-            title: 'React Native E-commerce App',
-            description:
-                '모바일 쇼핑몰 앱 개발 프로젝트. 결제 시스템 통합 중 예산 부족으로 중단되었습니다.',
-            status: 'dead' as const,
-            createdAt: '2023-01-15',
-            owner: {
-                id: 'user1',
-                username: 'dev_kim',
-                avatar: 'https://avatars.githubusercontent.com/u/1?v=4',
-            },
-            thumbnail: 'https://avatars.githubusercontent.com/u/2?v=4',
-        },
-        {
-            id: '2',
-            title: 'Node.js Chat Server',
-            description: '실시간 채팅 서버 구축 프로젝트. WebSocket을 활용한 멀티룸 채팅 시스템.',
-            status: 'alive' as const,
-            createdAt: '2023-03-20',
-            owner: {
-                id: 'user2',
-                username: 'backend_lee',
-                avatar: 'https://avatars.githubusercontent.com/u/2?v=4',
-            },
-        },
-        {
-            id: '3',
-            title: 'Vue.js Admin Dashboard',
-            description: '관리자 대시보드 프로젝트. 차트와 테이블을 활용한 데이터 시각화.',
-            status: 'dead' as const,
-            createdAt: '2023-02-10',
-            owner: {
-                id: 'user3',
-                username: 'frontend_park',
-                avatar: 'https://avatars.githubusercontent.com/u/3?v=4',
-            },
-        },
-    ]
+const Home = async () => {
+    const supabase = await createClient()
+
+    const { data: projects, error } = await supabase
+        .from('projects')
+        .select(
+            `
+            *,
+            profiles!projects_user_id_fkey (
+                id,
+                username,
+                avatar_url,
+                full_name
+            )
+        `,
+        )
+        .order('created_at', { ascending: false })
+        .limit(3)
+
+    if (error) {
+        console.error('Supabase error:', error)
+    }
 
     return (
         <PageLayout>
@@ -60,99 +40,68 @@ const Home = () => {
                     </p>
                 </div>
 
-                {/* TombstoneIcon 예제 */}
+                {/* 최근 프로젝트 */}
                 <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">TombstoneIcon 예제</h2>
-                    <div className="bg-white border border-gray-200 rounded-lg p-8">
-                        <div className="flex items-center justify-center gap-8 flex-wrap">
-                            <div className="text-center">
-                                <TombstoneIcon className="w-16 h-16 text-red-600 mb-2" />
-                                <p className="text-sm text-gray-600">빨간색</p>
-                            </div>
-                            <div className="text-center">
-                                <TombstoneIcon className="w-16 h-16 text-gray-600 mb-2" />
-                                <p className="text-sm text-gray-600">회색</p>
-                            </div>
-                            <div className="text-center">
-                                <TombstoneIcon className="w-16 h-16 text-blue-600 mb-2" />
-                                <p className="text-sm text-gray-600">파란색</p>
-                            </div>
-                            <div className="text-center">
-                                <TombstoneIcon className="w-16 h-16 text-purple-600 mb-2" />
-                                <p className="text-sm text-gray-600">보라색</p>
-                            </div>
-                        </div>
+                    <div className="flex items-center justify-between mb-6">
+                        <h2 className="text-2xl font-bold text-gray-900">최근 등록된 프로젝트</h2>
+                        <Link
+                            href="/projects"
+                            className="text-sm text-gray-600 hover:text-gray-900"
+                        >
+                            모두 보기 →
+                        </Link>
                     </div>
-                </div>
-
-                {/* EmptyState 예제 */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">EmptyState 예제</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white border border-gray-200 rounded-lg">
-                            <EmptyState
-                                icon={Search}
-                                title="검색 결과 없음"
-                                description="검색어에 맞는 프로젝트를 찾을 수 없습니다."
-                            />
-                        </div>
-                        <div className="bg-white border border-gray-200 rounded-lg">
-                            <EmptyState
-                                icon={FileText}
-                                title="프로젝트 없음"
-                                description="등록된 프로젝트가 없습니다."
-                            />
-                        </div>
-                        <div className="bg-white border border-gray-200 rounded-lg">
-                            <EmptyState
-                                useTombstone={true}
-                                title="죽은 프로젝트"
-                                description="이 프로젝트는 더 이상 존재하지 않습니다."
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Skeleton UI 예제 */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Skeleton UI 예제</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[1, 2, 3].map(i => (
-                            <div
-                                key={i}
-                                className="bg-white border border-gray-200 rounded-lg overflow-hidden"
-                            >
-                                <Skeleton className="h-48 w-full" />
-                                <div className="p-4 space-y-3">
-                                    <Skeleton className="h-4 w-3/4" />
-                                    <Skeleton className="h-4 w-full" />
-                                    <Skeleton className="h-4 w-5/6" />
-                                    <div className="flex gap-2 mt-4">
-                                        <Skeleton className="h-8 w-8 rounded-full" />
-                                        <Skeleton className="h-4 w-24" />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* 프로젝트 카드 예제 */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">ProjectCard 예제</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {exampleProjects.map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                id={project.id}
-                                title={project.title}
-                                description={project.description}
-                                status={project.status}
-                                createdAt={project.createdAt}
-                                owner={project.owner}
-                                thumbnail={project.thumbnail}
-                            />
-                        ))}
+                        {projects && projects.length > 0
+                            ? projects.map((project: ProjectWithOwner) => (
+                                  <Link key={project.id} href={`/projects/${project.id}`}>
+                                      <ProjectCard
+                                          id={project.id}
+                                          title={project.title}
+                                          description={project.description}
+                                          githubUrl={project.github_url || ''}
+                                          demoUrl={project.demo_url || ''}
+                                          startDate={project.start_date}
+                                          deathDate={project.death_date}
+                                          deathReasons={project.death_reasons || []}
+                                          deathReasonOther={project.death_reason_other || ''}
+                                          techStack={project.tech_stack || []}
+                                          whatAchieved={project.what_achieved || ''}
+                                          whatFailed={project.what_failed || ''}
+                                          lessonsLearned={project.lessons_learned || []}
+                                          detailedStory={project.detailed_story || ''}
+                                          screenshots={project.screenshots || []}
+                                          isAnonymous={project.is_anonymous}
+                                          allowAdoption={project.allow_adoption}
+                                          status={project.status}
+                                          createdAt={project.created_at}
+                                          updatedAt={project.updated_at}
+                                          viewCount={project.view_count}
+                                          likeCount={project.like_count}
+                                          owner={{
+                                              id: project.profiles?.id || '',
+                                              userName: project.profiles?.username || '익명',
+                                              avatarUrl:
+                                                  project.profiles?.avatar_url ||
+                                                  '/placeholder-avatar.png',
+                                          }}
+                                      />
+                                  </Link>
+                              ))
+                            : // 스켈레톤 로딩 상태
+                              Array.from({ length: 3 }).map((_, i) => (
+                                  <div
+                                      key={i}
+                                      className="bg-white border border-gray-200 rounded-lg overflow-hidden"
+                                  >
+                                      <Skeleton className="h-[150px] w-full" />
+                                      <div className="p-4 space-y-2">
+                                          <Skeleton className="h-6 w-3/4" />
+                                          <Skeleton className="h-4 w-full" />
+                                          <Skeleton className="h-4 w-5/6" />
+                                      </div>
+                                  </div>
+                              ))}
                     </div>
                 </div>
             </Container>

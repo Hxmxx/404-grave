@@ -8,13 +8,14 @@ import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 import { TombstoneIcon } from '@/components/ui/tombstoneIcon'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
     const { user, isLoggedIn, loading } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
-
+    const router = useRouter()
     const handleOpen = () => {
         setIsOpen(!isOpen)
     }
@@ -47,13 +48,13 @@ const Header = () => {
 
     return (
         <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-8 sm:px-6 lg:px-8" style={{ maxWidth: '1600px' }}>
                 <div className="flex items-center justify-between h-16 gap-4">
                     {/* Left Section - Logo */}
                     <div className="flex items-center gap-8">
-                        <Link href="/" className="flex items-center gap-2">
-                            <TombstoneIcon className="w-8 h-8 text-gray-900" />
-                            <h1 className="text-xl font-bold text-gray-900 whitespace-nowrap">
+                        <Link href="/" className="flex items-center gap-1">
+                            <TombstoneIcon className="w-12 h-12" />
+                            <h1 className="text-xl font-bold text-gray-900 whitespace-nowrap tracking-tight">
                                 404 Grave
                             </h1>
                         </Link>
@@ -63,20 +64,20 @@ const Header = () => {
                     <nav className="hidden md:flex items-center gap-6">
                         <Link
                             href="/projects"
-                            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors cursor-pointer"
                         >
                             프로젝트
                         </Link>
                         <Link
                             href="/adoption"
-                            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors cursor-pointer"
                         >
                             부활
                         </Link>
                         {isLoggedIn && (
                             <Link
                                 href="/dashboard"
-                                className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                                className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors cursor-pointer"
                             >
                                 대시보드
                             </Link>
@@ -102,7 +103,7 @@ const Header = () => {
                     )}
 
                     {/* Right Section - Actions */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                         {/* Search Button */}
                         <Button
                             variant="ghost"
@@ -121,10 +122,11 @@ const Header = () => {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                className="hidden sm:flex rounded-full text-sm"
+                                className="hidden sm:flex rounded-full text-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                                onClick={() => router.push('/projects/new')}
                             >
-                                <FileText className="h-5 w-5" />
-                                사망진단서 작성
+                                <FileText className="h-6 w-6" />
+                                프로젝트 등록
                             </Button>
                         )}
 
@@ -137,8 +139,7 @@ const Header = () => {
                             <div className="flex items-center gap-1">
                                 <Button
                                     variant="ghost"
-                                    size="icon"
-                                    className="cursor-pointer"
+                                    className="cursor-pointer h-auto p-0"
                                     asChild
                                 >
                                     <Link
@@ -148,12 +149,14 @@ const Header = () => {
                                             <Image
                                                 src={user.user_metadata.avatar_url}
                                                 alt="Profile"
-                                                width={32}
-                                                height={32}
+                                                width={40}
+                                                height={40}
                                                 className="rounded-full"
                                             />
                                         ) : (
-                                            <User className="h-5 w-5" />
+                                            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <User className="h-5 w-5 text-gray-500" />
+                                            </div>
                                         )}
                                     </Link>
                                 </Button>
@@ -171,7 +174,7 @@ const Header = () => {
                                         />
                                     </Button>
                                     {isOpen && (
-                                        <div className="absolute right-0 top-10 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
+                                        <div className="absolute right-0 top-11 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                                             <Link
                                                 href={`/profile/${user?.user_metadata?.user_name || user?.id}`}
                                             >

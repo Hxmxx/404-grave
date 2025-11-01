@@ -1,91 +1,112 @@
-import Link from 'next/link'
+'use client'
+
 import Image from 'next/image'
-import { TombstoneIcon } from './tombstoneIcon'
-import { Calendar, User } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { Heart } from 'lucide-react'
+import { differenceInDays } from 'date-fns'
+import { Badge } from './badge'
 
 interface ProjectCardProps {
     id: string
     title: string
-    description?: string
-    status: 'dead' | 'alive'
-    createdAt?: string
-    owner?: {
+    description: string
+    githubUrl: string
+    demoUrl: string
+    startDate: string
+    deathDate: string
+    deathReasons: string[]
+    deathReasonOther: string
+    techStack: string[]
+    whatAchieved: string
+    whatFailed: string
+    lessonsLearned: string[]
+    detailedStory: string
+    screenshots: string[]
+    isAnonymous: boolean
+    allowAdoption: boolean
+    status: 'active' | 'adopted' | 'archived'
+    createdAt: string
+    updatedAt: string
+    viewCount: number
+    likeCount: number
+    owner: {
         id: string
-        username: string
-        avatar?: string
+        userName: string
+        avatarUrl: string
     }
-    thumbnail?: string
-    className?: string
 }
 
-export function ProjectCard({
-    id,
+export const ProjectCard = ({
     title,
     description,
+    startDate,
+    deathDate,
+    isAnonymous,
     status,
-    createdAt,
+    viewCount,
+    likeCount,
     owner,
-    thumbnail,
-    className,
-}: ProjectCardProps) {
+}: ProjectCardProps) => {
+    let survivalTime: number | string = differenceInDays(new Date(deathDate), new Date(startDate))
+    const ownerName = isAnonymous ? '익명' : owner.userName
+    if (survivalTime >= 30) {
+        survivalTime /= 30
+        survivalTime = Math.floor(survivalTime)
+        if (survivalTime >= 12) {
+            survivalTime /= 12
+            survivalTime = Math.floor(survivalTime)
+            survivalTime = `${survivalTime}년 생존`
+        } else {
+            survivalTime = `${survivalTime}개월 생존`
+        }
+    } else {
+        survivalTime = `${survivalTime}일 생존`
+    }
+
     return (
-        <Link href={`/projects/${id}`}>
-            <div
-                className={cn(
-                    'group relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg',
-                    status === 'dead' && 'hover:border-red-200',
-                    status === 'alive' && 'hover:border-green-200',
-                    className,
-                )}
+        <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
+            <Badge
+                variant={status === 'adopted' ? 'default' : 'destructive'}
+                className="absolute top-2 right-2 z-50"
             >
-                {/* Thumbnail */}
-                <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100">
-                    {thumbnail ? (
-                        <Image src={thumbnail} alt={title} fill className="object-cover" />
-                    ) : (
-                        <div className="flex items-center justify-center h-full">
-                            <TombstoneIcon className="w-20 h-20 text-gray-300" />
-                        </div>
-                    )}
-                    {/* Status Badge */}
-                    <div className="absolute top-3 right-3">
-                        <span
-                            className={cn(
-                                'px-3 py-1 rounded-full text-xs font-medium',
-                                status === 'dead' && 'bg-red-100 text-red-800',
-                                status === 'alive' && 'bg-green-100 text-green-800',
-                            )}
-                        >
-                            {status === 'dead' ? '사망' : '부활'}
-                        </span>
-                    </div>
+                {status === 'adopted' ? '입양 완료' : '사망'}
+            </Badge>
+            <Image
+                src={'https://i.pinimg.com/736x/51/00/85/5100858e6616d9f66467fde6da97c543.jpg'}
+                alt={title}
+                width={485}
+                height={300}
+                className="w-[485px] h-[150px] object-cover"
+            />
+            {/* Section */}
+            <div className="p-4 flex flex-col">
+                <h3 className="text-lg font-bold text-gray-900 truncate">{title}</h3>
+                <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
+            </div>
+            <div className="p-4 flex flex-row justify-between">
+                <div className="flex flex-row items-center gap-1">
+                    <span className="text-sm text-gray-500">조회수 {viewCount}</span>
                 </div>
-
-                {/* Content */}
-                <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600">
-                        {title}
-                    </h3>
-                    {description && (
-                        <p className="text-sm text-gray-600 mb-4 line-clamp-2">{description}</p>
-                    )}
-
-                    {/* Meta Info */}
-                    <div className="flex items-center justify-between text-xs text-gray-500">
-                        <div className="flex items-center gap-1">
-                            <User className="w-3 h-3" />
-                            <span>{owner?.username || 'Unknown'}</span>
-                        </div>
-                        {createdAt && (
-                            <div className="flex items-center gap-1">
-                                <Calendar className="w-3 h-3" />
-                                <span>{new Date(createdAt).toLocaleDateString('ko-KR')}</span>
-                            </div>
-                        )}
-                    </div>
+                <div className="flex flex-row items-center gap-1">
+                    <Heart className="h-4 w-4 text-gray-500" />
+                    <span className="text-sm text-gray-500">{likeCount}</span>
                 </div>
             </div>
-        </Link>
+            <div className="p-4">
+                <hr className="border-gray-200 mb-3" />
+                <div className="flex flex-row items-center gap-1 justify-between w-full">
+                    <div className="flex flex-row items-center gap-1">
+                        <Image
+                            src={owner.avatarUrl}
+                            alt={owner.userName}
+                            width={20}
+                            height={20}
+                            className="w-6 h-6 rounded-full"
+                        />
+                        <span className="text-sm text-gray-500">{ownerName}</span>
+                    </div>
+                    <span className="text-sm text-gray-500">{survivalTime}</span>
+                </div>
+            </div>
+        </div>
     )
 }

@@ -8,10 +8,10 @@ interface ContainerProps {
 }
 
 const sizeMap = {
-    sm: 'max-w-2xl',
-    md: 'max-w-4xl',
-    lg: 'max-w-6xl',
-    xl: 'max-w-7xl',
+    sm: 'max-w-[80vw]', // 화면 너비의 80%
+    md: 'max-w-[80vw]', // 화면 너비의 80%
+    lg: 'max-w-[80vw]', // 화면 너비의 80%
+    xl: 'max-w-[80vw]', // 화면 너비의 80%
 }
 
 export function Container({ children, size = 'lg', noPadding = false, className }: ContainerProps) {
