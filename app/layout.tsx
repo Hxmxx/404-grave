@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Noto_Sans_KR } from 'next/font/google'
 import './globals.css'
 import QueryProvider from './providers'
+import PageLayout from '@/components/layout/pageLayout'
 
 export const metadata: Metadata = {
     title: '404 Grave',
@@ -22,7 +23,9 @@ export default function RootLayout({
     return (
         <html lang="ko">
             <body className={`${NotoSansKR.variable} antialiased`}>
-                <QueryProvider>{children}</QueryProvider>
+                <QueryProvider>
+                    <PageLayout>{children}</PageLayout>
+                </QueryProvider>
             </body>
         </html>
     )

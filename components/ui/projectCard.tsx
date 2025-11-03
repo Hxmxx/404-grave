@@ -45,6 +45,7 @@ export const ProjectCard = ({
     viewCount,
     likeCount,
     owner,
+    screenshots = [],
 }: ProjectCardProps) => {
     let survivalTime: number | string = differenceInDays(new Date(deathDate), new Date(startDate))
     const ownerName = isAnonymous ? '익명' : owner.userName
@@ -63,15 +64,20 @@ export const ProjectCard = ({
     }
 
     return (
-        <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
+        <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md cursor-pointer [&:hover]:scale-102 transition-all duration-200">
             <Badge
                 variant={status === 'adopted' ? 'default' : 'destructive'}
-                className="absolute top-2 right-2 z-50"
+                className="absolute top-2 right-2 z-10"
             >
                 {status === 'adopted' ? '입양 완료' : '사망'}
             </Badge>
+            {/* Thumbnail */}
             <Image
-                src={'https://i.pinimg.com/736x/51/00/85/5100858e6616d9f66467fde6da97c543.jpg'}
+                src={
+                    screenshots[0] ||
+                    owner.avatarUrl ||
+                    'https://i.pinimg.com/1200x/4f/c3/a4/4fc3a4db6c4f400b49f353e045f3f8c9.jpg'
+                }
                 alt={title}
                 width={485}
                 height={300}
@@ -96,13 +102,19 @@ export const ProjectCard = ({
                 <div className="flex flex-row items-center gap-1 justify-between w-full">
                     <div className="flex flex-row items-center gap-1">
                         <Image
-                            src={owner.avatarUrl}
-                            alt={owner.userName}
+                            src={
+                                isAnonymous
+                                    ? 'https://i.pravatar.cc/150?img=1'
+                                    : owner.avatarUrl || 'https://i.pravatar.cc/150?img=1'
+                            }
+                            alt={isAnonymous ? '익명' : owner.userName}
                             width={20}
                             height={20}
                             className="w-6 h-6 rounded-full"
                         />
-                        <span className="text-sm text-gray-500">{ownerName}</span>
+                        <span className="text-sm text-gray-500">
+                            {isAnonymous ? '익명' : ownerName}
+                        </span>
                     </div>
                     <span className="text-sm text-gray-500">{survivalTime}</span>
                 </div>

@@ -33,3 +33,26 @@ export interface ProjectWithOwner extends Project {
         full_name: string | null
     }
 }
+
+export interface ProjectFormData {
+    title: string
+    description: string
+    github_url: string | null
+    demo_url: string | null
+    start_date: string
+    death_date: string
+    death_reasons: string[]
+    death_reason_other: string | null
+    tech_stack: string[]
+    what_achieved: string | null
+    what_failed: string | null
+    lessons_learned: string[]
+    detailed_story: string | null
+    screenshots: File[] | null
+    is_anonymous: boolean
+    allow_adoption: boolean
+    status: 'active' | 'adopted' | 'archived'
+    view_count: number
+    like_count: number
+    comment_count: number
+}

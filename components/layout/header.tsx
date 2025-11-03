@@ -2,7 +2,7 @@
 
 import { Button } from '../ui/button'
 import Link from 'next/link'
-import { Bell, Search, ChevronDown, User, Menu, FileText } from 'lucide-react'
+import { Bell, Search, ChevronDown, User, Menu } from 'lucide-react'
 import { Input } from '../ui/input'
 import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
@@ -11,11 +11,19 @@ import { TombstoneIcon } from '@/components/ui/tombstoneIcon'
 import { useRouter } from 'next/navigation'
 
 const Header = () => {
-    const { user, isLoggedIn, loading } = useAuth()
+    const { user, profile, isLoggedIn, loading } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
     const router = useRouter()
+
+    const handleSearch = () => {
+        router.push(`/search?query=${searchQuery}`)
+        setIsSearchOpen(false)
+        setSearchQuery('')
+    }
+
     const handleOpen = () => {
         setIsOpen(!isOpen)
     }
@@ -95,8 +103,14 @@ const Header = () => {
                                     type="text"
                                     placeholder="프로젝트 또는 사용자 검색"
                                     rightIcon={<Search className="text-gray-500 h-5 w-5" />}
+                                    onChange={e => setSearchQuery(e.target.value)}
                                     className="w-full h-10 text-sm"
                                     autoFocus
+                                    onKeyDown={e => {
+                                        if (e.key === 'Enter') {
+                                            handleSearch()
+                                        }
+                                    }}
                                 />
                             </div>
                         </div>
@@ -118,18 +132,6 @@ const Header = () => {
                             <Bell className="h-5 w-5" />
                         </Button>
 
-                        {isLoggedIn && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                className="hidden sm:flex rounded-full text-sm cursor-pointer hover:bg-gray-100 transition-colors"
-                                onClick={() => router.push('/projects/new')}
-                            >
-                                <FileText className="h-6 w-6" />
-                                프로젝트 등록
-                            </Button>
-                        )}
-
                         {/* User Menu */}
                         {!isLoggedIn && !loading ? (
                             <Button variant="ghost" className="cursor-pointer" asChild>
@@ -142,13 +144,11 @@ const Header = () => {
                                     className="cursor-pointer h-auto p-0"
                                     asChild
                                 >
-                                    <Link
-                                        href={`/profile/${user?.user_metadata?.user_name || user?.id}`}
-                                    >
-                                        {user?.user_metadata?.avatar_url ? (
+                                    <Link href={`/profile/${profile?.username || user?.id}`}>
+                                        {profile?.avatar_url ? (
                                             <Image
-                                                src={user.user_metadata.avatar_url}
-                                                alt="Profile"
+                                                src={profile.avatar_url}
+                                                alt={profile.username}
                                                 width={40}
                                                 height={40}
                                                 className="rounded-full"
@@ -176,7 +176,7 @@ const Header = () => {
                                     {isOpen && (
                                         <div className="absolute right-0 top-11 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                                             <Link
-                                                href={`/profile/${user?.user_metadata?.user_name || user?.id}`}
+                                                href={`/profile/${profile?.username || user?.id}`}
                                             >
                                                 <button className="w-full px-4 py-2 text-left hover:bg-gray-50 text-sm">
                                                     프로필
